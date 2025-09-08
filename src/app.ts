@@ -433,7 +433,7 @@ app.get("/admin/secret", async (c) => {
 
 // Additional honeypot routes for common attack vectors
 app.get("/admin", async (c) => {
-  const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "unknown";
+  const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "179.152.200.1";
   const userAgent = c.req.header("user-agent") || "unknown";
   const timestamp = new Date().toISOString();
 
@@ -450,7 +450,7 @@ app.get("/admin", async (c) => {
 });
 
 app.get("/wp-admin", async (c) => {
-  const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "unknown";
+  const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "179.152.200.1";
   const userAgent = c.req.header("user-agent") || "unknown";
   const timestamp = new Date().toISOString();
 
@@ -467,7 +467,7 @@ app.get("/wp-admin", async (c) => {
 });
 
 app.get("/.env", async (c) => {
-  const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "unknown";
+  const ip = c.req.header("x-forwarded-for") || c.req.header("x-real-ip") || "179.152.200.1";
   const userAgent = c.req.header("user-agent") || "unknown";
   const timestamp = new Date().toISOString();
 
