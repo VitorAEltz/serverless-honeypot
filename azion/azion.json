@@ -1,13 +1,23 @@
 {
-  "name": "virtuous-nature",
-  "bucket": "",
+  "name": "mindthesec-security-demo",
+  "bucket": "mindthesec-security-demo",
   "preset": "typescript",
   "env": "production",
-  "prefix": "",
-  "not-first-run": false,
-  "function": [],
+  "prefix": "20250910122545",
+  "not-first-run": true,
+  "function": [
+    {
+      "id": 50113,
+      "name": "mindthesec-security-demo",
+      "file": "",
+      "args": "./azion/args.json",
+      "instance-id": 44788,
+      "instance-name": "",
+      "cache-id": 0
+    }
+  ],
   "application": {
-    "id": 0,
+    "id": 1757518833,
     "name": "__DEFAULT__"
   },
   "domain": {
@@ -22,15 +32,41 @@
   "origin": null,
   "rules-engine": {
     "created": false,
-    "rules": null
+    "rules": [
+      {
+        "id": 476029,
+        "name": "Deliver Static Assets",
+        "phase": "request"
+      },
+      {
+        "id": 476030,
+        "name": "Redirect to index.html",
+        "phase": "request"
+      },
+      {
+        "id": 476031,
+        "name": "Execute Function",
+        "phase": "request"
+      }
+    ]
   },
-  "cache-settings": null,
+  "cache-settings": [],
   "workloads": {
-    "id": 0,
-    "name": "",
-    "domains": null,
-    "url": "",
-    "deployment_id": null
+    "id": 1757515191,
+    "name": "mindthesec-security-demo",
+    "domains": [],
+    "url": "https://qjyuenlvm5e.map.azionedge.net",
+    "deployment_id": [
+      {
+        "id": 163273,
+        "name": "mindthesec-security-demo"
+      }
+    ]
   },
-  "connectors": null
+  "connectors": [
+    {
+      "id": 259,
+      "name": "mindthesec-security-demo"
+    }
+  ]
 }

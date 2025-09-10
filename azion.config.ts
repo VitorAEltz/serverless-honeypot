@@ -25,15 +25,97 @@ export default {
   },
   functions: [
     {
-      name: '$FUNCTION_NAME',
-      path: './functions/index.js'
+      name: 'mindthesec-security-demo',
+      path: './functions/index.js',
+      bindings: {
+        storage: {
+          bucket: 'mindthesec-security-demo',
+          prefix: '20250910122545'
+        }
+      }
+    }
+  ],
+  storage: [
+    {
+      name: 'mindthesec-security-demo',
+      prefix: '20250910122545',
+      dir: './src/templates',
+      edgeAccess: 'read_only'
+    }
+  ],
+  connectors: [
+    {
+      name: 'mindthesec-security-demo',
+      active: true,
+      type: 'storage',
+      attributes: {
+        bucket: 'mindthesec-security-demo',
+        prefix: '20250910122545'
+      }
     }
   ],
   applications: [
     {
-      name: '$APPLICATION_NAME',
+      name: 'mindthesec-security-demo',
       rules: {
         request: [
+          {
+            name: 'Deliver Static Assets',
+            description: 'Deliver static assets directly from storage',
+            active: true,
+            criteria: [
+              [
+                {
+                  variable: '${uri}',
+                  conditional: 'if',
+                  operator: 'matches',
+                  argument:
+                    '\\.(jpg|jpeg|png|gif|bmp|webp|svg|ico|ttf|otf|woff|woff2|eot|pdf|doc|docx|xls|xlsx|ppt|pptx|mp4|webm|mp3|wav|ogg|css|js|json|xml|html|txt|csv|zip|rar|7z|tar|gz|webmanifest|map|md|yaml|yml)$'
+                }
+              ]
+            ],
+            behaviors: [
+              {
+                type: 'set_connector',
+                attributes: {
+                  value: 'mindthesec-security-demo'
+                }
+              },
+              {
+                type: 'deliver'
+              }
+            ]
+          },
+          {
+            name: 'Redirect to index.html',
+            description:
+              'Handle all routes by rewriting to index.html for client-side routing',
+            active: true,
+            criteria: [
+              [
+                {
+                  variable: '${uri}',
+                  conditional: 'if',
+                  operator: 'matches',
+                  argument: '^\\/'
+                }
+              ]
+            ],
+            behaviors: [
+              {
+                type: 'set_connector',
+                attributes: {
+                  value: 'mindthesec-security-demo'
+                }
+              },
+              {
+                type: 'rewrite_request',
+                attributes: {
+                  value: '/homepage.html'
+                }
+              }
+            ]
+          },
           {
             name: 'Execute Function',
             description: 'Execute function for all requests',
@@ -52,7 +134,7 @@ export default {
               {
                 type: 'run_function',
                 attributes: {
-                  value: '$FUNCTION_NAME'
+                  value: 'mindthesec-security-demo'
                 }
               }
             ]
@@ -61,15 +143,15 @@ export default {
       },
       functionsInstances: [
         {
-          name: '$FUNCTION_INSTANCE_NAME',
-          ref: '$FUNCTION_NAME'
+          name: 'mindthesec-security-demo',
+          ref: 'mindthesec-security-demo'
         }
       ]
     }
   ],
   workloads: [
     {
-      name: '$WORKLOAD_NAME',
+      name: 'mindthesec-security-demo',
       active: true,
       infrastructure: 1,
       protocols: {
@@ -82,13 +164,13 @@ export default {
       },
       deployments: [
         {
-          name: '$DEPLOYMENT_NAME',
+          name: 'mindthesec-security-demo',
           current: true,
           active: true,
           strategy: {
             type: 'default',
             attributes: {
-              application: '$APPLICATION_NAME'
+              application: 'mindthesec-security-demo'
             }
           }
         }
